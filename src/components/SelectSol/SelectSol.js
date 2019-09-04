@@ -20,6 +20,8 @@ const styles = {
   }
 };
 
+const mapNames = ['curiosity', 'opportunity', 'spirit']
+
 class SelectSol extends PureComponent {
   state = {
     sol: this.props.selectedSol // eslint-disable-line react/destructuring-assignment
@@ -27,7 +29,7 @@ class SelectSol extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.changePropsSol = debounce(this.changePropsSol, 100);
+    this.changePropsSol = debounce(this.changePropsSol, 500);
   }
 
   handleChange = (_e, sol) => {
@@ -36,8 +38,14 @@ class SelectSol extends PureComponent {
   };
 
   changePropsSol(value) {
-    const { changeSol } = this.props;
+    const { changeSol, fetchPhotosRequest, apiKey, data } = this.props;
     changeSol(value);
+
+    if (!(value in data['curiosity'])) {
+      mapNames.forEach(name => {
+        fetchPhotosRequest({ name, sol: value, key: apiKey })
+      })
+    }
   }
 
   render() {
