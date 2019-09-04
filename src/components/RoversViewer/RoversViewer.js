@@ -1,11 +1,3 @@
-// Здесь вам нужно реализовать вью
-
-// Подключите его к редакс роутеру
-// Вам потребуются селекторы для получения выбранного сола
-// и списка фотографий
-
-// Так же вы будете диспатчить экшены CHANGE_SOL и FETCH_PHOTOS_REQUEST
-// Эти экшены находятся в модуле ROVER PHOTOS
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { changeSol, fetchPhotosRequest } from '../../modules/RoverPhotos' 
@@ -26,13 +18,13 @@ class RoversViewer extends Component {
     }
 
     render() {
-        const { changeSol, data, sol: {current}, fetchPhotosRequest, apiKey } = this.props
+        const { changeSol, data, sol: {current, min, max}, fetchPhotosRequest, apiKey } = this.props
         return (
             <div className={styles.root}>
                 <SelectSol 
                     selectedSol={current}
-                    minSol={1}
-                    maxSol={100}
+                    minSol={min}
+                    maxSol={max}
                     changeSol={changeSol}
                     key={apiKey}
                     fetchPhotosRequest={fetchPhotosRequest}

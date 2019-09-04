@@ -29,7 +29,7 @@ class SelectSol extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.changePropsSol = debounce(this.changePropsSol, 100);
+    this.changePropsSol = debounce(this.changePropsSol, 500);
   }
 
   handleChange = (_e, sol) => {
